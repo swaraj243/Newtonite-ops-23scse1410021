@@ -1,0 +1,18 @@
+# Newtonite Ops — Engineering Rules
+
+## Authorization
+- Never rely on UI-only permissions; enforce team-scoped RBAC on the server for every query and mutation.
+
+## Mutations on work items
+- Every mutation on a work item MUST run inside a single `prisma.$transaction` that:
+  1. Updates the work item (with version check for optimistic concurrency),
+  2. Writes an append-only `ActivityEvent`,
+  3. Enqueues an `OutboxJob` when needed (e.g. notifications, async side effects).
+
+## Optimistic concurrency
+- Use the `version` integer column on `WorkItem`.
+- On version mismatch, return HTTP 409 Conflict with the latest work item state in the response body.
+
+## Workflow and permissions
+- Keep workflow rules and role-permission matrices in a single, clean module: `backend/src/services/workflowAndPermissions.ts`.
+- This module should be easy to explain and modify live during demos or reviews.
