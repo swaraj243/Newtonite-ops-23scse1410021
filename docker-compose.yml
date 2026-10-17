@@ -4,7 +4,7 @@ services:
     container_name: newtonite-postgres
     restart: unless-stopped
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-newtonite}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-newtonite_dev_password}
