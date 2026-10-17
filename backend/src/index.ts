@@ -1,16 +1,11 @@
-/**
- * Express API entrypoint — routes will be added in later steps.
- */
-import express from "express";
+import "dotenv/config";
+import { app } from "./app.js";
+import { startOutboxPoller } from "./worker/outboxWorker.js";
 
-const app = express();
-const port = process.env.PORT ?? 3001;
-
-app.get("/health", (_req, res) => {
-  res.json({ status: "ok" });
-});
+const port = Number(process.env.PORT ?? 4000);
 
 if (process.env.NODE_ENV !== "test") {
+  startOutboxPoller();
   app.listen(port, () => {
     console.log(`Backend listening on port ${port}`);
   });
