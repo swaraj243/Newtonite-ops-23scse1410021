@@ -34,3 +34,6 @@ coverage/
 
 # Docker
 postgres_data/
+
+# Archives
+backend.zip
