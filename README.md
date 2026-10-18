@@ -31,7 +31,7 @@ Newtonite Ops follows a robust decoupled client-server architecture:
 graph TD
     subgraph Client["Frontend SPA (React 19 + Tailwind CSS)"]
         UI[Dashboard / Kanban / Table / Item Drawer]
-        APIClient[Axios / Fetch Client (/api)]
+        APIClient["Axios / Fetch Client (/api)"]
     end
 
     subgraph Server["Backend API (Express + TypeScript)"]
@@ -43,7 +43,7 @@ graph TD
     end
 
     subgraph DB["PostgreSQL 16"]
-        Prisma[(Prisma ORM)]
+        Prisma[("Prisma ORM")]
     end
 
     UI -->|HTTP Requests| APIClient
